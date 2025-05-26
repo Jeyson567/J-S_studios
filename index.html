@@ -10,100 +10,43 @@
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    color: #0b1a2a;
-    /* Fondo con la primera imagen difuminada */
-    background: url('https://i.imgur.com/upP8s7s.jpg') no-repeat center center fixed;
-    background-size: cover;
-    filter: blur(8px);
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2;
-  }
-  /* Un overlay semitransparente para mejorar contraste */
-  body::after {
-    content: "";
-    position: fixed;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(255,255,255,0.85);
-    z-index: -1;
-  }
-  /* Contenedor principal */
-  .container-wrapper {
-    position: relative;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 80vh 30px 40px 30px;
-    z-index: 10;
-  }
-  /* Sobre gigante fijo en pantalla */
-  .big-envelope {
-    position: fixed;
-    top: 12%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 22vw;
-    max-width: 200px;
-    height: 22vw;
-    max-height: 200px;
     background: linear-gradient(135deg, #ff3d7f, #ff8c00, #0a89ff);
-    background-size: 600% 600%;
-    border-radius: 30px 30px 50px 50px;
-    box-shadow:
-      0 10px 35px rgba(255, 61, 127, 0.75),
-      inset 0 0 25px rgba(255, 255, 255, 0.5);
-    clip-path: polygon(
-      0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%
-    );
-    cursor: default;
-    user-select: none;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.6s ease;
-    z-index: 1000;
-    animation: gradientShift 12s ease infinite;
-  }
-  /* Sobre pico */
-  .big-envelope::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80%;
-    background: linear-gradient(135deg, #ff003c, #ffae00, #0087ff);
-    background-size: 600% 600%;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    border-radius: 30px 30px 0 0;
-    box-shadow:
-      inset 0 0 25px rgba(255, 255, 255, 0.7),
-      0 4px 7px rgba(255, 0, 60, 0.4);
-    animation: gradientShift 12s ease infinite;
-    animation-delay: 6s;
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: #0b1a2a;
+    overflow-x: hidden;
   }
   @keyframes gradientShift {
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
     100%{background-position:0% 50%;}
   }
-  .container {
-    background: #fff;
+  .container-wrapper {
+    position: relative;
+    max-width: 520px;
+    margin: 40px auto 60px auto;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 30px;
     box-shadow: 0 18px 60px rgba(255, 61, 127, 0.3);
-    text-align: center;
-    padding: 30px 20px 40px 20px;
-    position: relative;
+    padding: 40px 30px 60px 30px;
+    overflow: hidden;
   }
-  /* Imagen principal (la niña en piscina) */
+  .container {
+    text-align: center;
+  }
+  /* Imagen principal más grande y visible */
   .main-image {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
+    width: 260px;
+    height: 260px;
+    border-radius: 25px;
     object-fit: cover;
-    box-shadow: 0 8px 20px rgba(255, 61, 127, 0.7);
-    margin: 0 auto 25px auto;
-    border: 5px solid #ff4b6e;
+    box-shadow: 0 12px 30px rgba(255, 61, 127, 0.8);
+    margin: 0 auto 40px auto;
+    border: 6px solid #ff4b6e;
+    transition: transform 0.3s ease;
+  }
+  .main-image:hover {
+    transform: scale(1.05);
   }
   h1 {
     font-size: 3rem;
@@ -111,35 +54,34 @@
     font-weight: 700;
     letter-spacing: 3px;
     color: #ff3d7f;
-    animation: fadeInDown 1.3s ease forwards;
     text-shadow: 0 3px 6px rgba(255, 61, 127, 0.6);
   }
-  p {
-    font-size: 1.25rem;
+  p, .verse {
+    font-size: 1.2rem;
     line-height: 1.75;
-    margin: 1.5em 0;
     color: #0b1a2a;
-    animation: fadeInUp 1.3s ease forwards;
+    margin: 1.5em 0;
+    opacity: 0;
+    transform: translateX(50px);
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
   .verse {
     font-style: italic;
     color: #666666;
     margin-top: 3em;
-    font-size: 1.1rem;
-    animation: fadeIn 2s ease forwards;
   }
-  /* Animaciones de texto */
-  @keyframes fadeInDown {
-    from {opacity: 0; transform: translateY(-35px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-  @keyframes fadeInUp {
-    from {opacity: 0; transform: translateY(35px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+  /* Animaciones escalonadas */
+  .animate1 { animation: slideInRight 0.7s forwards 0.3s; }
+  .animate2 { animation: slideInRight 0.7s forwards 0.7s; }
+  .animate3 { animation: slideInRight 0.7s forwards 1.1s; }
+  .animate4 { animation: slideInRight 0.7s forwards 1.5s; }
+  .animate5 { animation: slideInRight 0.7s forwards 1.9s; }
+  @keyframes slideInRight {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   /* Confeti animado */
   .confetti {
@@ -180,27 +122,27 @@
 </head>
 <body>
 
-<div class="big-envelope" id="bigEnvelope"></div>
-
 <div class="container-wrapper">
   <div class="container">
     <img class="main-image" src="https://i.imgur.com/Kp8Oh43.jpg" alt="Imagen principal de Fernando Orrego" />
     <h1>Culto de Acción de Gracias</h1>
-    <p>
-      Invitamos cordialmente a usted y a su familia a un culto especial para celebrar un año más de vida de <strong>Fernando Orrego</strong>.
+    <p class="animate1">
+      Con inmensa gratitud, invitamos a usted y a su familia a acompañarnos en un culto muy especial para celebrar un año más de vida de <strong>Fernando Orrego</strong>.
     </p>
-    <p>
-      El evento se realizará el <strong>jueves 30 de mayo</strong> en la casa de habitación.
+    <p class="animate2">
+      Este evento se llevará a cabo el <strong>jueves 30 de mayo</strong> en la casa de habitación. Será un momento único para compartir bendiciones, reflexionar y renovar la fe que nos une.
     </p>
-    <p>
-      Acompáñenos para compartir un momento de gratitud, reflexión y bendición.
+    <p class="animate3">
+      En este culto de acción de gracias, elevaremos nuestras oraciones y voces, agradeciendo a Dios por su guía y protección durante todo este tiempo. ¡Su presencia hará la diferencia y llenará de alegría este día!
     </p>
-    <p class="verse">
+    <p class="animate4">
+      Le esperamos con los brazos abiertos para compartir juntos esta hermosa celebración y fortalecer los lazos que nos mantienen unidos como comunidad y familia.
+    </p>
+    <p class="verse animate5">
       "Den gracias al Señor porque él es bueno; su amor es eterno." <br />
       — Salmos 107:1
     </p>
 
-    <!-- Confeti animado -->
     <div class="confetti"></div>
     <div class="confetti"></div>
     <div class="confetti"></div>
@@ -208,15 +150,6 @@
     <div class="confetti"></div>
   </div>
 </div>
-
-<script>
-  const bigEnvelope = document.getElementById('bigEnvelope');
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const opacity = Math.max(1 - scrollY / 350, 0);
-    bigEnvelope.style.opacity = opacity;
-  });
-</script>
 
 </body>
 </html>
