@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Invitación Culto de Acción de Gracias - Fernando Orrego</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: #0b1a2a;
+    /* Fondo con la primera imagen difuminada */
+    background: url('https://i.imgur.com/upP8s7s.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+  }
+  /* Un overlay semitransparente para mejorar contraste */
+  body::after {
+    content: "";
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(255,255,255,0.85);
+    z-index: -1;
+  }
+  /* Contenedor principal */
+  .container-wrapper {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 80vh 30px 40px 30px;
+    z-index: 10;
+  }
+  /* Sobre gigante fijo en pantalla */
+  .big-envelope {
+    position: fixed;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22vw;
+    max-width: 200px;
+    height: 22vw;
+    max-height: 200px;
+    background: linear-gradient(135deg, #ff3d7f, #ff8c00, #0a89ff);
+    background-size: 600% 600%;
+    border-radius: 30px 30px 50px 50px;
+    box-shadow:
+      0 10px 35px rgba(255, 61, 127, 0.75),
+      inset 0 0 25px rgba(255, 255, 255, 0.5);
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%
+    );
+    cursor: default;
+    user-select: none;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+    z-index: 1000;
+    animation: gradientShift 12s ease infinite;
+  }
+  /* Sobre pico */
+  .big-envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background: linear-gradient(135deg, #ff003c, #ffae00, #0087ff);
+    background-size: 600% 600%;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    border-radius: 30px 30px 0 0;
+    box-shadow:
+      inset 0 0 25px rgba(255, 255, 255, 0.7),
+      0 4px 7px rgba(255, 0, 60, 0.4);
+    animation: gradientShift 12s ease infinite;
+    animation-delay: 6s;
+  }
+  @keyframes gradientShift {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+  .container {
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 0 18px 60px rgba(255, 61, 127, 0.3);
+    text-align: center;
+    padding: 30px 20px 40px 20px;
+    position: relative;
+  }
+  /* Imagen principal (la niña en piscina) */
+  .main-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(255, 61, 127, 0.7);
+    margin: 0 auto 25px auto;
+    border: 5px solid #ff4b6e;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #ff3d7f;
+    animation: fadeInDown 1.3s ease forwards;
+    text-shadow: 0 3px 6px rgba(255, 61, 127, 0.6);
+  }
+  p {
+    font-size: 1.25rem;
+    line-height: 1.75;
+    margin: 1.5em 0;
+    color: #0b1a2a;
+    animation: fadeInUp 1.3s ease forwards;
+  }
+  .verse {
+    font-style: italic;
+    color: #666666;
+    margin-top: 3em;
+    font-size: 1.1rem;
+    animation: fadeIn 2s ease forwards;
+  }
+  /* Animaciones de texto */
+  @keyframes fadeInDown {
+    from {opacity: 0; transform: translateY(-35px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(35px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  /* Confeti animado */
+  .confetti {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    top: -15px;
+    animation: confettiFall 3.5s linear infinite;
+    opacity: 0.95;
+    filter: drop-shadow(0 0 1.5px rgba(0,0,0,0.2));
+  }
+  .confetti:nth-child(2) {
+    left: 18%;
+    background-color: #ff3d7f;
+    animation-delay: 0.7s;
+  }
+  .confetti:nth-child(3) {
+    left: 48%;
+    background-color: #ffd460;
+    animation-delay: 1.2s;
+  }
+  .confetti:nth-child(4) {
+    left: 72%;
+    background-color: #0099ff;
+    animation-delay: 1.6s;
+  }
+  .confetti:nth-child(5) {
+    left: 90%;
+    background-color: #a967ff;
+    animation-delay: 2.1s;
+  }
+  @keyframes confettiFall {
+    0% {transform: translateY(0) rotate(0deg);}
+    100% {transform: translateY(480px) rotate(360deg);}
+  }
+</style>
+</head>
+<body>
+
+<div class="big-envelope" id="bigEnvelope"></div>
+
+<div class="container-wrapper">
+  <div class="container">
+    <img class="main-image" src="https://i.imgur.com/Kp8Oh43.jpg" alt="Imagen principal de Fernando Orrego" />
+    <h1>Culto de Acción de Gracias</h1>
+    <p>
+      Invitamos cordialmente a usted y a su familia a un culto especial para celebrar un año más de vida de <strong>Fernando Orrego</strong>.
+    </p>
+    <p>
+      El evento se realizará el <strong>jueves 30 de mayo</strong> en la casa de habitación.
+    </p>
+    <p>
+      Acompáñenos para compartir un momento de gratitud, reflexión y bendición.
+    </p>
+    <p class="verse">
+      "Den gracias al Señor porque él es bueno; su amor es eterno." <br />
+      — Salmos 107:1
+    </p>
+
+    <!-- Confeti animado -->
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+  </div>
+</div>
+
+<script>
+  const bigEnvelope = document.getElementById('bigEnvelope');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const opacity = Math.max(1 - scrollY / 350, 0);
+    bigEnvelope.style.opacity = opacity;
+  });
+</script>
+
+</body>
+</html>
