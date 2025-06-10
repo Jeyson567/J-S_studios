@@ -27,7 +27,7 @@
     height: 100vh;
     overflow-y: auto;
     transition: left 0.3s ease;
-    left: -100%; /* Inicia oculto */
+    left: 0;
     top: 0;
     z-index: 10500;
   }
@@ -195,7 +195,6 @@
       transition: left 0.3s ease;
     }
 
-    /* Estilo del botón hamburguesa */
     #menuToggle {
       display: block;
       background-color: #00bcd4;
@@ -204,10 +203,6 @@
       font-size: 1.5rem;
       cursor: pointer;
       border: none;
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      z-index: 10501;
     }
 
     #main {
@@ -287,18 +282,12 @@
       <button class="add-btn">Agregar al carrito</button>
     </div>
     <!-- End Marketing Products -->
-    
     <!-- Accesorios Products -->
-    <div class="product accesorios" data-id="5" data-price="150">
+    <div class="product accesorios" data-id="5" data-price="250">
       <strong>Accesorio 1</strong>
-      <img src="https://via.placeholder.com/280" alt="Accesorio 1" />
-      <div class="price">Q150</div>
-      <button class="add-btn">Agregar al carrito</button>
-    </div>
-    <div class="product accesorios" data-id="6" data-price="200">
-      <strong>Accesorio 2</strong>
-      <img src="https://via.placeholder.com/280" alt="Accesorio 2" />
-      <div class="price">Q200</div>
+      <img src="https://i.imgur.com/someimage.jpg" alt="Accesorio 1" />
+      <p>Descripción del accesorio 1.</p>
+      <div class="price">Q250</div>
       <button class="add-btn">Agregar al carrito</button>
     </div>
     <!-- End Accesorios Products -->
@@ -314,47 +303,112 @@
 </div>
 
 <script>
-  // Función para mostrar los productos según la categoría
+  const cart = [];
+  const btnWhatsapp = document.getElementById("btn-whatsapp");
+  const cartItemsDiv = document.getElementById("cart-items");
+  const cartTotalDiv = document.getElementById("cart-total");
+  const cartNote = document.getElementById("cart-note");
+
+  // Mostrar productos según categoría seleccionada
   function showCategory(category) {
     const products = document.querySelectorAll('.product');
     products.forEach(product => {
-      product.style.display = 'none'; // Ocultar todos los productos
-    });
-
-    const categoryProducts = document.querySelectorAll(`.${category}`);
-    categoryProducts.forEach(product => {
-      product.style.display = 'block'; // Mostrar solo los productos de la categoría seleccionada
+      if (product.classList.contains(category)) {
+        product.style.display = 'block';
+      } else {
+        product.style.display = 'none';
+      }
     });
   }
 
-  // Selecciona todos los elementos de menú
-  const menuItems = document.querySelectorAll('.menu-item');
-
-  // Asignar evento a cada item del menú
-  menuItems.forEach(item => {
+  // Filtrar por categoría (marketing o accesorios)
+  document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', function () {
-      // Remover la clase 'active' de todos los elementos del menú
-      menuItems.forEach(menuItem => {
-        menuItem.classList.remove('active');
-      });
-
-      // Agregar la clase 'active' al item seleccionado
+      document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
       item.classList.add('active');
-
-      // Mostrar la categoría correspondiente
       const category = item.getAttribute('data-category');
       showCategory(category);
     });
   });
 
-  // Inicializar mostrando los productos de la primera categoría (Marketing) por defecto
+  // Inicializar la visualización de productos al cargar
   showCategory('marketing');
+
+  // Agregar producto al carrito
+  document.querySelectorAll('.add-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const productDiv = button.closest('.product');
+      const productName = productDiv.querySelector('strong').textContent;
+      const productPrice = parseFloat(productDiv.getAttribute('data-price'));
+      const productId = productDiv.getAttribute('data-id');
+
+      const existingProduct = cart.find(item => item.id === productId);
+
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        cart.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
+      }
+
+      updateCart();
+    });
+  });
+
+  // Actualizar el carrito
+  function updateCart() {
+    cartItemsDiv.innerHTML = '';
+    let total = 0;
+    
+    cart.forEach(item => {
+      total += item.price * item.quantity;
+      cartItemsDiv.innerHTML += `
+        <div>
+          <strong>${item.name}</strong>
+          <input type="number" value="${item.quantity}" min="1" class="quantity" data-id="${item.id}" />
+          <span>Q${item.price * item.quantity}</span>
+        </div>
+      `;
+    });
+
+    cartTotalDiv.textContent = `Total: Q${total.toFixed(2)}`;
+    btnWhatsapp.disabled = cart.length === 0;
+  }
+
+  // Modificar la cantidad de los productos
+  cartItemsDiv.addEventListener('input', function (e) {
+    if (e.target.classList.contains('quantity')) {
+      const productId = e.target.getAttribute('data-id');
+      const newQuantity = parseInt(e.target.value);
+
+      const product = cart.find(item => item.id === productId);
+      if (product) {
+        product.quantity = newQuantity;
+        updateCart();
+      }
+    }
+  });
+
+  // Enviar pedido por WhatsApp
+  btnWhatsapp.addEventListener('click', function () {
+    let orderDetails = `Pedido de J&S STUDIOS GT:\n\n`;
+    
+    cart.forEach(item => {
+      orderDetails += `${item.name} - Cantidad: ${item.quantity} - Precio: Q${(item.price * item.quantity).toFixed(2)}\n`;
+    });
+
+    const note = cartNote.value ? `\nNota adicional: ${cartNote.value}` : '';
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    orderDetails += `\n\nTotal: Q${total.toFixed(2)}${note}`;
+
+    const whatsappUrl = `https://wa.me/50248608447?text=${encodeURIComponent(orderDetails)}`;
+    window.open(whatsappUrl, '_blank');
+  });
 
   // Mostrar el menú hamburguesa en pantallas pequeñas
   document.getElementById('menuToggle').addEventListener('click', function() {
     const sidebar = document.getElementById('sidebar');
-    const currentLeft = sidebar.style.left;
-    sidebar.style.left = (currentLeft === '0px') ? '-100%' : '0';
+    const currentDisplay = sidebar.style.display;
+    sidebar.style.display = currentDisplay === 'block' ? 'none' : 'block';
   });
 </script>
 
