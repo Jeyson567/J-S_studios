@@ -43,6 +43,8 @@
   }
   #menu {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
   .menu-item {
     padding: 1rem 1.5rem;
@@ -186,13 +188,21 @@
   @media (max-width: 768px) {
     #sidebar {
       width: 100%;
-      position: relative;
-      height: auto;
-      display: none;
+      position: fixed;
+      top: 0;
+      left: -100%;
+      display: block;
+      transition: left 0.3s ease;
     }
 
     #menuToggle {
       display: block;
+      background-color: #00bcd4;
+      color: white;
+      padding: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border: none;
     }
 
     #main {
@@ -227,7 +237,7 @@
 <body>
 
 <!-- Botón hamburguesa -->
-<button id="menuToggle" aria-label="Abrir menú" style="display:none;">☰</button>
+<button id="menuToggle" aria-label="Abrir menú">☰</button>
 
 <div id="sidebar">
   <div id="logo">
@@ -363,7 +373,8 @@
   // Mostrar el menú hamburguesa en pantallas pequeñas
   document.getElementById('menuToggle').addEventListener('click', function() {
     const sidebar = document.getElementById('sidebar');
-    sidebar.style.display = sidebar.style.display === 'none' || sidebar.style.display === '' ? 'block' : 'none';
+    const currentDisplay = sidebar.style.display;
+    sidebar.style.display = currentDisplay === 'block' ? 'none' : 'block';
   });
 </script>
 
