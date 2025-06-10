@@ -252,11 +252,8 @@
     <img src="https://i.imgur.com/OfE6gYP.png" alt="J&S Studios GT Logo" />
   </div>
   <nav id="menu">
-    <div class="menu-item active" data-category="accesorios">Accesorios de Celulares</div>
-    <div class="menu-item" data-category="webs">Páginas Web</div>
-    <div class="menu-item" data-category="menus">Menús Digitales</div>
-    <div class="menu-item" data-category="logos">Diseño de Logos</div>
-    <div class="menu-item" data-category="tarjetas">Tarjetas de Presentación</div>
+    <div class="menu-item active" data-category="marketing">Marketing</div>
+    <div class="menu-item" data-category="accesorios">Accesorios</div>
   </nav>
 </div>
 
@@ -282,28 +279,19 @@
   const btnWhatsApp = document.getElementById('btn-whatsapp');
 
   const productsData = {
+    marketing: [
+      { id: 1, name: "Página Web Básica", price: 650, image: "https://i.imgur.com/rJVgWoQ.jpg" },
+      { id: 2, name: "Menú Digital Básico", price: 150, image: "https://i.imgur.com/8hW0sfJ.jpg" },
+      { id: 3, name: "Diseño de Logo Básico", price: 100, image: "https://i.imgur.com/zKpOWpR.jpg" },
+      { id: 4, name: "Tarjetas de Presentación", price: 55, image: "https://imgur.com/HRuK6jx.jpg" }
+    ],
     accesorios: [
-      { id: 1, name: "Fundas para Celular", price: 100, image: "https://i.imgur.com/8HwnFoe.jpg" },
-      { id: 2, name: "Cargadores Rápidos", price: 150, image: "https://i.imgur.com/9fkcWQx.jpg" }
-    ],
-    webs: [
-      { id: 3, name: "Página Web Básica", price: 650, image: "https://i.imgur.com/rJVgWoQ.jpg" },
-      { id: 4, name: "Página Web Premium", price: 1200, image: "https://i.imgur.com/HRuK6jx.jpg" }
-    ],
-    menus: [
-      { id: 5, name: "Menú Digital Básico", price: 150, image: "https://i.imgur.com/8hW0sfJ.jpg" },
-      { id: 6, name: "Menú Digital Avanzado", price: 250, image: "https://i.imgur.com/zKpOWpR.jpg" }
-    ],
-    logos: [
-      { id: 7, name: "Diseño de Logo Básico", price: 100, image: "https://i.imgur.com/7WVmZxK.jpg" },
-      { id: 8, name: "Diseño de Logo Premium", price: 250, image: "https://i.imgur.com/tZ3Fz6Z.jpg" }
-    ],
-    tarjetas: [
-      { id: 9, name: "Tarjetas de Presentación", price: 55, image: "https://i.imgur.com/9kxDz4B.jpg" }
+      { id: 5, name: "Fundas para Celular", price: 100, image: "https://i.imgur.com/8HwnFoe.jpg" },
+      { id: 6, name: "Cargadores Rápidos", price: 150, image: "https://i.imgur.com/9fkcWQx.jpg" }
     ]
   };
 
-  let currentCategory = "accesorios";
+  let currentCategory = "marketing";
   let cart = [];
 
   function loadProducts(category) {
@@ -395,14 +383,21 @@
     });
   }
 
-  menuItems.forEach(item => {
-    item.addEventListener('click', () => {
-      if(item.classList.contains('active')) return;
-      menuItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      currentCategory = item.getAttribute('data-category');
-      loadProducts(currentCategory);
+  // Función para generar el mensaje de WhatsApp
+  btnWhatsApp.addEventListener('click', function () {
+    if(cart.length === 0) return;
+
+    let orderDetails = `Pedido de J&S Studios GT:\n\n`;
+
+    cart.forEach(item => {
+      orderDetails += `${item.name} - Cantidad: ${item.quantity} - Precio: Q${(item.price * item.quantity).toFixed(2)}\n`;
     });
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    orderDetails += `\n\nTotal: Q${total.toFixed(2)}\n\nGracias por tu compra.`;
+
+    const whatsappUrl = `https://wa.me/50248608447?text=${encodeURIComponent(orderDetails)}`;
+    window.open(whatsappUrl, '_blank');
   });
 
   // Toggle menú lateral en móvil
