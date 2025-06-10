@@ -80,7 +80,7 @@
   }
   #products {
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
   }
   .product {
@@ -181,12 +181,53 @@
   #btn-whatsapp:hover:not(:disabled) {
     background: #0099a0;
   }
+
+  /* Media queries para pantallas pequeñas (móviles) */
+  @media (max-width: 768px) {
+    #sidebar {
+      width: 100%;
+      position: relative;
+      height: auto;
+      display: none;
+    }
+
+    #menuToggle {
+      display: block;
+    }
+
+    #main {
+      margin-left: 0;
+      padding: 1rem;
+    }
+
+    #menu {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-item {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    #products {
+      grid-template-columns: 1fr; /* Los productos se apilan en una columna en móviles */
+    }
+
+    #logo img {
+      width: 120px; /* Reducir tamaño del logo en móviles */
+    }
+
+    .product {
+      width: 100%;
+    }
+  }
 </style>
 </head>
 <body>
 
 <!-- Botón hamburguesa -->
-<button id="menuToggle" aria-label="Abrir menú">☰</button>
+<button id="menuToggle" aria-label="Abrir menú" style="display:none;">☰</button>
 
 <div id="sidebar">
   <div id="logo">
@@ -317,6 +358,12 @@
 
     const whatsappUrl = `https://wa.me/50248608447?text=${encodeURIComponent(orderDetails)}`;
     window.open(whatsappUrl, '_blank');
+  });
+
+  // Mostrar el menú hamburguesa en pantallas pequeñas
+  document.getElementById('menuToggle').addEventListener('click', function() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.style.display = sidebar.style.display === 'none' || sidebar.style.display === '' ? 'block' : 'none';
   });
 </script>
 
