@@ -282,6 +282,21 @@
       <button class="add-btn">Agregar al carrito</button>
     </div>
     <!-- End Marketing Products -->
+    
+    <!-- Accesorios Products -->
+    <div class="product accesorios" data-id="5" data-price="150">
+      <strong>Accesorio 1</strong>
+      <img src="https://via.placeholder.com/280" alt="Accesorio 1" />
+      <div class="price">Q150</div>
+      <button class="add-btn">Agregar al carrito</button>
+    </div>
+    <div class="product accesorios" data-id="6" data-price="200">
+      <strong>Accesorio 2</strong>
+      <img src="https://via.placeholder.com/280" alt="Accesorio 2" />
+      <div class="price">Q200</div>
+      <button class="add-btn">Agregar al carrito</button>
+    </div>
+    <!-- End Accesorios Products -->
   </div>
 
   <section id="cart">
@@ -294,88 +309,41 @@
 </div>
 
 <script>
-  const cart = [];
-  const btnWhatsapp = document.getElementById("btn-whatsapp");
-  const cartItemsDiv = document.getElementById("cart-items");
-  const cartTotalDiv = document.getElementById("cart-total");
-  const cartNote = document.getElementById("cart-note");
-
-  // Agregar producto al carrito
-  document.querySelectorAll('.add-btn').forEach(button => {
-    button.addEventListener('click', function () {
-      const productDiv = button.closest('.product');
-      const productName = productDiv.querySelector('strong').textContent;
-      const productPrice = parseFloat(productDiv.getAttribute('data-price'));
-      const productId = productDiv.getAttribute('data-id');
-
-      const existingProduct = cart.find(item => item.id === productId);
-
-      if (existingProduct) {
-        existingProduct.quantity++;
-      } else {
-        cart.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
-      }
-
-      updateCart();
-    });
-  });
-
-  // Actualizar el carrito
-  function updateCart() {
-    cartItemsDiv.innerHTML = '';
-    let total = 0;
-    
-    cart.forEach(item => {
-      total += item.price * item.quantity;
-      cartItemsDiv.innerHTML += `
-        <div>
-          <strong>${item.name}</strong>
-          <input type="number" value="${item.quantity}" min="1" class="quantity" data-id="${item.id}" />
-          <span>Q${item.price * item.quantity}</span>
-        </div>
-      `;
+  // Función para mostrar los productos según la categoría
+  function showCategory(category) {
+    const products = document.querySelectorAll('.product');
+    products.forEach(product => {
+      product.style.display = 'none'; // Ocultar todos los productos
     });
 
-    cartTotalDiv.textContent = `Total: Q${total.toFixed(2)}`;
-    btnWhatsapp.disabled = cart.length === 0;
+    const categoryProducts = document.querySelectorAll(`.${category}`);
+    categoryProducts.forEach(product => {
+      product.style.display = 'block'; // Mostrar solo los productos de la categoría seleccionada
+    });
   }
 
-  // Modificar la cantidad de los productos
-  cartItemsDiv.addEventListener('input', function (e) {
-    if (e.target.classList.contains('quantity')) {
-      const productId = e.target.getAttribute('data-id');
-      const newQuantity = parseInt(e.target.value);
+  // Selecciona todos los elementos de menú
+  const menuItems = document.querySelectorAll('.menu-item');
 
-      const product = cart.find(item => item.id === productId);
-      if (product) {
-        product.quantity = newQuantity;
-        updateCart();
-      }
-    }
-  });
+  // Asignar evento a cada item del menú
+  menuItems.forEach(item => {
+    item.addEventListener('click', function () {
+      // Remover la clase 'active' de todos los elementos del menú
+      menuItems.forEach(menuItem => {
+        menuItem.classList.remove('active');
+      });
 
-  // Enviar pedido por WhatsApp
-  btnWhatsapp.addEventListener('click', function () {
-    let orderDetails = `Pedido de J&S STUDIOS GT:\n\n`;
-    
-    cart.forEach(item => {
-      orderDetails += `${item.name} - Cantidad: ${item.quantity} - Precio: Q${(item.price * item.quantity).toFixed(2)}\n`;
+      // Agregar la clase 'active' al item seleccionado
+      item.classList.add('active');
+
+      // Mostrar la categoría correspondiente
+      const category = item.getAttribute('data-category');
+      showCategory(category);
     });
-
-    const note = cartNote.value ? `\nNota adicional: ${cartNote.value}` : '';
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    orderDetails += `\n\nTotal: Q${total.toFixed(2)}${note}`;
-
-    const whatsappUrl = `https://wa.me/50248608447?text=${encodeURIComponent(orderDetails)}`;
-    window.open(whatsappUrl, '_blank');
   });
 
-  // Mostrar el menú hamburguesa en pantallas pequeñas
-  document.getElementById('menuToggle').addEventListener('click', function() {
-    const sidebar = document.getElementById('sidebar');
-    const currentDisplay = sidebar.style.display;
-    sidebar.style.display = currentDisplay === 'block' ? 'none' : 'block';
-  });
+  // Inicializar mostrando los productos de la primera categoría (Marketing) por defecto
+  showCategory('marketing');
 </script>
 
 </body>
