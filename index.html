@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>J&S STUDIOS GT</title>
+<title>J&S Studios GT</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
   body {
@@ -16,10 +16,12 @@
     display: flex;
     position: relative;
   }
+
+  /* Sidebar */
   #sidebar {
     width: 220px;
-    background: #000000;
-    box-shadow: 2px 0 15px #00bcd4;
+    background: #1a4d2e;
+    box-shadow: 2px 0 15px #39b54aaa;
     display: flex;
     flex-direction: column;
     padding: 1rem 0;
@@ -31,6 +33,8 @@
     top: 0;
     z-index: 10500;
   }
+
+  /* Logo */
   #logo {
     display: flex;
     justify-content: center;
@@ -41,29 +45,31 @@
     height: auto;
     user-select: none;
   }
+
+  /* Menu */
   #menu {
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
   }
   .menu-item {
     padding: 1rem 1.5rem;
     cursor: pointer;
-    color: #00bcd4;
+    color: #7ee99e;
     font-weight: 700;
     border-left: 4px solid transparent;
     transition: background 0.3s ease, border-left-color 0.3s ease;
     user-select: none;
   }
   .menu-item:hover {
-    background: #00bcd433;
+    background: #7ee99e33;
   }
   .menu-item.active {
-    background: #00bcd455;
-    border-left-color: #00bcd4;
-    color: #0f0f0f;
+    background: #7ee99e55;
+    border-left-color: #7ee99e;
+    color: #0b2f1b;
     font-weight: 800;
   }
+
+  /* Main Section */
   #main {
     flex-grow: 1;
     margin-left: 220px;
@@ -73,56 +79,64 @@
     flex-direction: column;
     transition: margin-left 0.3s ease;
   }
+
   h1 {
     margin-top: 0;
     margin-bottom: 1.5rem;
     text-align: center;
-    color: #00bcd4;
-    text-shadow: 0 0 8px #00bcd4;
+    color: #7ee99e;
+    text-shadow: 0 0 8px #7ee99e;
   }
+
   #products {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
   }
+
   .product {
-    background: #1a1a1a;
+    background: #1a4d2e;
     border-radius: 12px;
-    box-shadow: 0 0 15px #00bcd433;
+    box-shadow: 0 0 15px #7ee99e55;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
   }
+
   .product:hover {
     transform: translateY(-8px);
-    box-shadow: 0 0 25px #00bcd466;
+    box-shadow: 0 0 25px #7ee99ecc;
   }
+
   .product img {
     width: 100%;
     height: 180px;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 1rem;
-    border: 2px solid #00bcd4;
+    border: 2px solid #7ee99e;
   }
+
   .product strong {
     font-size: 1.2rem;
     margin-bottom: 0.3rem;
     text-align: center;
-    color: #ffffff;
+    color: #e6f7ff;
   }
+
   .price {
     font-weight: 700;
     font-size: 1.2rem;
-    color: #00bcd4;
+    color: #7ee99e;
     margin-bottom: 1rem;
   }
+
   button.add-btn {
-    background: #00bcd4;
+    background: #7ee99e;
     border: none;
-    color: #0f0f0f;
+    color: #0b2f1b;
     font-weight: 700;
     padding: 0.7rem 1.5rem;
     border-radius: 10px;
@@ -131,41 +145,47 @@
     font-size: 1rem;
     transition: background 0.3s ease;
   }
+
   button.add-btn:hover {
-    background: #0099a0;
+    background: #5fc27a;
   }
+
   #cart {
-    background: #1a1a1a;
+    background: #1a4d2e;
     border-radius: 12px;
-    box-shadow: 0 0 20px #00bcd455;
+    box-shadow: 0 0 20px #7ee99ebb;
     padding: 1.5rem;
     margin-top: 2rem;
     max-height: 320px;
     overflow-y: auto;
   }
+
   #cart h2 {
     margin-top: 0;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #00bcd4;
+    border-bottom: 2px solid #7ee99e;
     padding-bottom: 0.5rem;
-    color: #00bcd4;
+    color: #7ee99e;
     text-align: center;
   }
+
   #cart-items {
-    color: #b1b1b1;
+    color: #d4f1db;
     font-family: monospace;
   }
+
   #cart-total {
     font-weight: 700;
     font-size: 1.3rem;
     margin-top: 1rem;
-    color: #00bcd4;
+    color: #7ee99e;
     text-align: center;
   }
+
   #btn-whatsapp {
-    background: #00bcd4;
+    background: #7ee99e;
     border: none;
-    color: #0f0f0f;
+    color: #0b2f1b;
     font-weight: 700;
     font-size: 1.2rem;
     padding: 0.9rem;
@@ -174,76 +194,50 @@
     cursor: pointer;
     transition: background 0.3s ease;
     margin-top: 1rem;
-    position: fixed; /* Fijar el botón en la parte inferior */
-    bottom: 20px; /* Espacio desde la parte inferior */
-    left: 50%; /* Centrar horizontalmente */
-    transform: translateX(-50%); /* Ajustar para que esté completamente centrado */
-    z-index: 10500; /* Asegurarse de que esté encima de otros elementos */
   }
 
   #btn-whatsapp:disabled {
-    background: #2b2b2b;
+    background: #164723;
     cursor: not-allowed;
-    color: #7a7a7a;
+    color: #679c73;
   }
 
   #btn-whatsapp:hover:not(:disabled) {
-    background: #0099a0;
+    background: #5fc27a;
   }
 
-  /* Media queries para pantallas pequeñas (móviles) */
-  @media (max-width: 768px) {
+  #menuToggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 11000;
+    background: #7ee99e;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: none;
+    font-size: 1.2rem;
+    color: #0b2f1b;
+  }
+
+  /* Responsive */
+  @media (max-width: 800px) {
     #sidebar {
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: -100%; /* Ocultar menú por defecto */
-      display: block;
-      transition: left 0.3s ease;
+      left: -250px;
+    }
+
+    #sidebar.open {
+      left: 0;
     }
 
     #menuToggle {
       display: block;
-      background-color: #00bcd4;
-      color: white;
-      padding: 1rem;
-      font-size: 1.5rem;
-      cursor: pointer;
-      border: none;
     }
 
     #main {
-      margin-left: 0;
+      margin-left: 0 !important;
       padding: 1rem;
-    }
-
-    #menu {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .menu-item {
-      text-align: center;
-      padding: 1rem;
-    }
-
-    #products {
-      grid-template-columns: 1fr; /* Los productos se apilan en una columna en móviles */
-    }
-
-    #logo img {
-      width: 120px; /* Reducir tamaño del logo en móviles */
-    }
-
-    .product {
-      width: 100%;
-    }
-
-    #btn-whatsapp {
-      font-size: 1.4rem; /* Aumentar el tamaño del texto en el botón */
-      padding: 1rem;
-      width: 90%; /* Reducir un poco el tamaño del botón */
-      bottom: 20px; /* Mantener el espacio desde la parte inferior */
     }
   }
 </style>
@@ -255,175 +249,163 @@
 
 <div id="sidebar">
   <div id="logo">
-    <img src="https://imgur.com/2OHwuRo.png" alt="J&S STUDIOS GT Logo" />
+    <img src="https://i.imgur.com/7AHG4WN.png" alt="J&S Studios GT Logo" />
   </div>
   <nav id="menu">
-    <div class="menu-item active" data-category="marketing">Marketing</div>
-    <div class="menu-item" data-category="accesorios">Accesorios de Celulares</div>
+    <div class="menu-item active" data-category="accesorios">Accesorios de Celulares</div>
+    <div class="menu-item" data-category="webs">Páginas Web</div>
+    <div class="menu-item" data-category="menus">Menús Digitales</div>
+    <div class="menu-item" data-category="logos">Diseño de Logos</div>
+    <div class="menu-item" data-category="tarjetas">Tarjetas de Presentación</div>
   </nav>
 </div>
 
 <div id="main">
-  <h1>J&S STUDIOS GT</h1>
-  <div id="products">
-    <!-- Marketing Products -->
-    <div class="product marketing" data-id="1" data-price="650">
-      <strong>Páginas Web</strong>
-      <img src="https://i.imgur.com/rJVgWoQ.jpg" alt="Imagen de Páginas Web" />
-      <p>Creación de sitios web personalizados para tu negocio o proyecto.</p>
-      <div class="price">Q650 anual</div>
-      <button class="add-btn">Agregar al carrito</button>
-    </div>
-    <div class="product marketing" data-id="2" data-price="150">
-      <strong>Menús Digitales</strong>
-      <img src="https://i.imgur.com/HRuK6jx.jpg" alt="Imagen de Menús Digitales" />
-      <p>Diseño de menús digitales para restaurantes, bares y más.</p>
-      <div class="price">Q150</div>
-      <button class="add-btn">Agregar al carrito</button>
-    </div>
-    <div class="product marketing" data-id="3" data-price="55">
-      <strong>Tarjetas de Presentación</strong>
-      <img src="https://i.imgur.com/8hW0sfJ.jpg" alt="Imagen de Tarjetas de Presentación" />
-      <p>Diseño único de tarjetas de presentación para tu marca.</p>
-      <div class="price">Q55 cada una</div>
-      <button class="add-btn">Agregar al carrito</button>
-    </div>
-    <div class="product marketing" data-id="4" data-price="100">
-      <strong>Diseño de Logos</strong>
-      <img src="https://i.imgur.com/zKpOWpR.jpg" alt="Imagen de Diseño de Logos" />
-      <p>Creación de logos originales y personalizados para tu empresa.</p>
-      <div class="price">Q100 cada uno</div>
-      <button class="add-btn">Agregar al carrito</button>
-    </div>
-    <!-- End Marketing Products -->
-    <!-- Accesorios Products -->
-    <div class="product accesorios" data-id="5" data-price="250">
-      <strong>Accesorio 1</strong>
-      <img src="https://i.imgur.com/someimage.jpg" alt="Accesorio 1" />
-      <p>Descripción del accesorio 1.</p>
-      <div class="price">Q250</div>
-      <button class="add-btn">Agregar al carrito</button>
-    </div>
-    <!-- End Accesorios Products -->
-  </div>
+  <h1>J&S Studios GT</h1>
+  <div id="products"></div>
 
   <section id="cart">
     <h2>Tu carrito</h2>
     <div id="cart-items">Tu carrito está vacío.</div>
     <div id="cart-total">Total: Q0.00</div>
-    <textarea id="cart-note" placeholder="Agregar una nota opcional..."></textarea>
     <button id="btn-whatsapp" disabled>Enviar pedido por WhatsApp</button>
   </section>
 </div>
 
 <script>
-  const cart = [];
-  const btnWhatsapp = document.getElementById("btn-whatsapp");
-  const cartItemsDiv = document.getElementById("cart-items");
-  const cartTotalDiv = document.getElementById("cart-total");
-  const cartNote = document.getElementById("cart-note");
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const menuItems = document.querySelectorAll('.menu-item');
+  const productsDiv = document.getElementById('products');
+  const cartItemsDiv = document.getElementById('cart-items');
+  const cartTotalDiv = document.getElementById('cart-total');
+  const btnWhatsApp = document.getElementById('btn-whatsapp');
 
-  // Mostrar productos según categoría seleccionada
-  function showCategory(category) {
-    const products = document.querySelectorAll('.product');
-    products.forEach(product => {
-      if (product.classList.contains(category)) {
-        product.style.display = 'block';
-      } else {
-        product.style.display = 'none';
-      }
-    });
-  }
+  const productsData = {
+    accesorios: [
+      { id: 1, name: "Fundas para Celular", price: 100, image: "https://i.imgur.com/8HwnFoe.jpg" },
+      { id: 2, name: "Cargadores Rápidos", price: 150, image: "https://i.imgur.com/9fkcWQx.jpg" }
+    ],
+    webs: [
+      { id: 3, name: "Página Web Básica", price: 650, image: "https://i.imgur.com/rJVgWoQ.jpg" },
+      { id: 4, name: "Página Web Premium", price: 1200, image: "https://i.imgur.com/HRuK6jx.jpg" }
+    ],
+    menus: [
+      { id: 5, name: "Menú Digital Básico", price: 150, image: "https://i.imgur.com/8hW0sfJ.jpg" },
+      { id: 6, name: "Menú Digital Avanzado", price: 250, image: "https://i.imgur.com/zKpOWpR.jpg" }
+    ],
+    logos: [
+      { id: 7, name: "Diseño de Logo Básico", price: 100, image: "https://i.imgur.com/7WVmZxK.jpg" },
+      { id: 8, name: "Diseño de Logo Premium", price: 250, image: "https://i.imgur.com/tZ3Fz6Z.jpg" }
+    ],
+    tarjetas: [
+      { id: 9, name: "Tarjetas de Presentación", price: 55, image: "https://i.imgur.com/9kxDz4B.jpg" }
+    ]
+  };
 
-  // Filtrar por categoría (marketing o accesorios)
-  document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', function () {
-      document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      const category = item.getAttribute('data-category');
-      showCategory(category);
-    });
-  });
+  let currentCategory = "accesorios";
+  let cart = [];
 
-  // Inicializar la visualización de productos al cargar
-  showCategory('marketing');
-
-  // Agregar producto al carrito
-  document.querySelectorAll('.add-btn').forEach(button => {
-    button.addEventListener('click', function () {
-      const productDiv = button.closest('.product');
-      const productName = productDiv.querySelector('strong').textContent;
-      const productPrice = parseFloat(productDiv.getAttribute('data-price'));
-      const productId = productDiv.getAttribute('data-id');
-
-      const existingProduct = cart.find(item => item.id === productId);
-
-      if (existingProduct) {
-        existingProduct.quantity++;
-      } else {
-        cart.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
-      }
-
-      updateCart();
-    });
-  });
-
-  // Actualizar el carrito
-  function updateCart() {
-    cartItemsDiv.innerHTML = '';
-    let total = 0;
-    
-    cart.forEach(item => {
-      total += item.price * item.quantity;
-      cartItemsDiv.innerHTML += `
-        <div>
-          <strong>${item.name}</strong>
-          <input type="number" value="${item.quantity}" min="1" class="quantity" data-id="${item.id}" />
-          <span>Q${item.price * item.quantity}</span>
-        </div>
+  function loadProducts(category) {
+    productsDiv.innerHTML = "";
+    const items = productsData[category] || [];
+    items.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `
+        <img src="${p.image}" alt="${p.name}" />
+        <strong>${p.name}</strong>
+        <div class="price">Q${p.price.toFixed(2)}</div>
+        <button class="add-btn">Agregar</button>
       `;
-    });
+      productsDiv.appendChild(div);
 
-    cartTotalDiv.textContent = `Total: Q${total.toFixed(2)}`;
-    btnWhatsapp.disabled = cart.length === 0;
+      const btn = div.querySelector('button.add-btn');
+      btn.addEventListener('click', () => addToCart(p.id));
+    });
   }
 
-  // Modificar la cantidad de los productos
-  cartItemsDiv.addEventListener('input', function (e) {
-    if (e.target.classList.contains('quantity')) {
-      const productId = e.target.getAttribute('data-id');
-      const newQuantity = parseInt(e.target.value);
-
-      const product = cart.find(item => item.id === productId);
-      if (product) {
-        product.quantity = newQuantity;
-        updateCart();
+  function addToCart(id) {
+    let prod;
+    for(let cat in productsData){
+      const p = productsData[cat].find(item => item.id === id);
+      if(p){
+        prod = p;
+        break;
       }
     }
-  });
+    if(!prod) return;
 
-  // Enviar pedido por WhatsApp
-  btnWhatsapp.addEventListener('click', function () {
-    let orderDetails = `Pedido de J&S STUDIOS GT:\n\n`;
-    
+    const item = cart.find(i => i.id === id);
+    if(item){
+      item.quantity++;
+    } else {
+      cart.push({...prod, quantity:1});
+    }
+    updateCart();
+  }
+
+  function updateCart() {
+    if(cart.length === 0){
+      cartItemsDiv.textContent = "Tu carrito está vacío.";
+      cartTotalDiv.textContent = "Total: Q0.00";
+      btnWhatsApp.disabled = true;
+      return;
+    }
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
     cart.forEach(item => {
-      orderDetails += `${item.name} - Cantidad: ${item.quantity} - Precio: Q${(item.price * item.quantity).toFixed(2)}\n`;
+      total += item.price * item.quantity;
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+
+      div.innerHTML = `
+        <div class="item-info">${item.name}</div>
+        <input type="number" min="1" value="${item.quantity}" data-id="${item.id}" />
+        <div>Q${(item.price * item.quantity).toFixed(2)}</div>
+        <button class="remove-btn" data-id="${item.id}" title="Quitar">&times;</button>
+      `;
+
+      cartItemsDiv.appendChild(div);
+    });
+    cartTotalDiv.textContent = `Total: Q${total.toFixed(2)}`;
+    btnWhatsApp.disabled = false;
+
+    document.querySelectorAll('#cart-items input[type=number]').forEach(input => {
+      input.addEventListener('change', e => {
+        const id = parseInt(e.target.getAttribute('data-id'));
+        let val = parseInt(e.target.value);
+        if(isNaN(val) || val < 1) val = 1;
+        e.target.value = val;
+
+        const item = cart.find(i => i.id === id);
+        if(item){
+          item.quantity = val;
+          updateCart();
+        }
+      });
     });
 
-    const note = cartNote.value ? `\nNota adicional: ${cartNote.value}` : '';
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    orderDetails += `\n\nTotal: Q${total.toFixed(2)}${note}`;
+    document.querySelectorAll('#cart-items .remove-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const id = parseInt(e.target.getAttribute('data-id'));
+        cart = cart.filter(i => i.id !== id);
+        updateCart();
+      });
+    });
+  }
 
-    const whatsappUrl = `https://wa.me/50248608447?text=${encodeURIComponent(orderDetails)}`;
-    window.open(whatsappUrl, '_blank');
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if(item.classList.contains('active')) return;
+      menuItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      currentCategory = item.getAttribute('data-category');
+      loadProducts(currentCategory);
+    });
   });
 
-  // Mostrar el menú hamburguesa en pantallas pequeñas
-  document.getElementById('menuToggle').addEventListener('click', function() {
-    const sidebar = document.getElementById('sidebar');
-    const currentDisplay = sidebar.style.display;
-    sidebar.style.display = currentDisplay === 'block' ? 'none' : 'block';
-  });
+  loadProducts(currentCategory);
 </script>
 
 </body>
