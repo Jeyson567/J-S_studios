@@ -174,12 +174,19 @@
     cursor: pointer;
     transition: background 0.3s ease;
     margin-top: 1rem;
+    position: fixed; /* Fijar el botón en la parte inferior */
+    bottom: 20px; /* Espacio desde la parte inferior */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translateX(-50%); /* Ajustar para que esté completamente centrado */
+    z-index: 10500; /* Asegurarse de que esté encima de otros elementos */
   }
+
   #btn-whatsapp:disabled {
     background: #2b2b2b;
     cursor: not-allowed;
     color: #7a7a7a;
   }
+
   #btn-whatsapp:hover:not(:disabled) {
     background: #0099a0;
   }
@@ -230,6 +237,13 @@
 
     .product {
       width: 100%;
+    }
+
+    #btn-whatsapp {
+      font-size: 1.4rem; /* Aumentar el tamaño del texto en el botón */
+      padding: 1rem;
+      width: 90%; /* Reducir un poco el tamaño del botón */
+      bottom: 20px; /* Mantener el espacio desde la parte inferior */
     }
   }
 </style>
