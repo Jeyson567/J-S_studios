@@ -3,165 +3,322 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Invitación Servicio de Acción de Gracia - Fernando Orrego</title>
+<title>J&S STUDIOS GT</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
   body {
-    font-family: 'Poppins', sans-serif;
     margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #ff3d7f, #ff8c00, #0a89ff);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    color: #0b1a2a;
-    overflow-x: hidden;
-  }
-  @keyframes gradientShift {
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
-  .container-wrapper {
+    min-height: 100vh;
+    overflow-y: auto;
+    background: #00bcd4; /* Color del fondo similar al del logo */
+    color: #ffffff;
+    font-family: 'Orbitron', monospace, Arial, sans-serif;
+    display: flex;
     position: relative;
-    max-width: 520px;
-    margin: 40px auto 60px auto;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 30px;
-    box-shadow: 0 18px 60px rgba(255, 61, 127, 0.3);
-    padding: 20px 30px 60px 30px;
-    overflow: hidden;
   }
-  .container {
-    text-align: center;
-    margin-top: 20px;
+  #sidebar {
+    width: 220px;
+    background: #000000;
+    box-shadow: 2px 0 15px #00bcd4;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    left: 0;
+    top: 0;
+    z-index: 10500;
   }
-  /* Imagen principal */
-  .main-image {
-    width: 260px;
-    height: 260px;
-    border-radius: 25px;
-    object-fit: cover;
-    box-shadow: 0 12px 30px rgba(255, 61, 127, 0.8);
-    margin: 40px auto 20px auto;
-    border: 6px solid #ff4b6e;
-    transition: transform 0.3s ease;
+  #logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
-  .main-image:hover {
-    transform: scale(1.05);
+  #logo img {
+    width: 160px;
+    height: auto;
+    user-select: none;
   }
-  /* Reproductor Spotify justo debajo de la imagen */
-  .music-player {
-    margin: 0 auto 40px auto;
-    max-width: 320px;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(255, 61, 127, 0.5);
+  #menu {
+    flex-grow: 1;
+  }
+  .menu-item {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    color: #00bcd4;
+    font-weight: 700;
+    border-left: 4px solid transparent;
+    transition: background 0.3s ease, border-left-color 0.3s ease;
+    user-select: none;
+  }
+  .menu-item:hover {
+    background: #00bcd433;
+  }
+  .menu-item.active {
+    background: #00bcd455;
+    border-left-color: #00bcd4;
+    color: #0f0f0f;
+    font-weight: 800;
+  }
+  #main {
+    flex-grow: 1;
+    margin-left: 220px;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s ease;
   }
   h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5em;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #ff3d7f;
-    text-shadow: 0 3px 6px rgba(255, 61, 127, 0.6);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #00bcd4;
+    text-shadow: 0 0 8px #00bcd4;
   }
-  p, .verse {
+  #products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+  .product {
+    background: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #00bcd433;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  .product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px #00bcd466;
+  }
+  .product img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: 2px solid #00bcd4;
+  }
+  .product strong {
     font-size: 1.2rem;
-    line-height: 1.75;
-    color: #0b1a2a;
-    margin: 1.5em 0;
-    opacity: 0;
-    transform: translateX(50px);
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
+    margin-bottom: 0.3rem;
+    text-align: center;
+    color: #ffffff;
   }
-  .verse {
-    font-style: italic;
-    color: #666666;
-    margin-top: 3em;
+  .price {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #00bcd4;
+    margin-bottom: 1rem;
   }
-  /* Animaciones escalonadas */
-  .animate1 { animation: slideInRight 0.7s forwards 0.3s; }
-  .animate2 { animation: slideInRight 0.7s forwards 0.7s; }
-  .animate3 { animation: slideInRight 0.7s forwards 1.1s; }
-  .animate4 { animation: slideInRight 0.7s forwards 1.5s; }
-  .animate5 { animation: slideInRight 0.7s forwards 1.9s; }
-  @keyframes slideInRight {
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  button.add-btn {
+    background: #00bcd4;
+    border: none;
+    color: #0f0f0f;
+    font-weight: 700;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: background 0.3s ease;
   }
-  /* Confeti animado */
-  .confetti {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
-    top: -15px;
-    animation: confettiFall 3.5s linear infinite;
-    opacity: 0.95;
-    filter: drop-shadow(0 0 1.5px rgba(0,0,0,0.2));
+  button.add-btn:hover {
+    background: #0099a0;
   }
-  .confetti:nth-child(2) {
-    left: 18%;
-    background-color: #ff3d7f;
-    animation-delay: 0.7s;
+  #cart {
+    background: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #00bcd455;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    max-height: 320px;
+    overflow-y: auto;
   }
-  .confetti:nth-child(3) {
-    left: 48%;
-    background-color: #ffd460;
-    animation-delay: 1.2s;
+  #cart h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #00bcd4;
+    padding-bottom: 0.5rem;
+    color: #00bcd4;
+    text-align: center;
   }
-  .confetti:nth-child(4) {
-    left: 72%;
-    background-color: #0099ff;
-    animation-delay: 1.6s;
+  #cart-items {
+    color: #b1b1b1;
+    font-family: monospace;
   }
-  .confetti:nth-child(5) {
-    left: 90%;
-    background-color: #a967ff;
-    animation-delay: 2.1s;
+  #cart-total {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    color: #00bcd4;
+    text-align: center;
   }
-  @keyframes confettiFall {
-    0% {transform: translateY(0) rotate(0deg);}
-    100% {transform: translateY(480px) rotate(360deg);}
+  #btn-whatsapp {
+    background: #00bcd4;
+    border: none;
+    color: #0f0f0f;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.9rem;
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 1rem;
+  }
+  #btn-whatsapp:disabled {
+    background: #2b2b2b;
+    cursor: not-allowed;
+    color: #7a7a7a;
+  }
+  #btn-whatsapp:hover:not(:disabled) {
+    background: #0099a0;
   }
 </style>
 </head>
 <body>
 
-<div class="container-wrapper">
-  <div class="container">
-    <img class="main-image" src="https://i.imgur.com/Kp8Oh43.jpg" alt="Imagen principal de Fernando Orrego" />
-    <div class="music-player">
-      <iframe src="https://open.spotify.com/embed/track/1jnUCPGWdEXtjTaviVG9E9?utm_source=generator" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-    </div>
-    <h1>Servicio de Acción de Gracia</h1>
-    <p class="animate1">
-     se les invita a usted y tres acompañantes a acompañarnos en un servicio especial para celebrar un año más de vida de <strong>Fernando Orrego</strong>.
-    </p>
-    <p class="animate2">
-      El servicio se realizará el <strong>viernes 30 de mayo</strong> en la casa de habitación. Será un tiempo para compartir bendiciones, reflexionar y renovar la fe que nos une.
-    </p>
-    <p class="animate3">
-      Durante este servicio de acción de gracia, elevaremos nuestras oraciones y voces, agradeciendo a Dios por su guía y protección constante. Su presencia será un honor para todos.
-    </p>
-    <p class="animate4">
-      Acompáñenos para vivir juntos este momento de gratitud y fortalecimiento espiritual.
-    </p>
-    <p class="verse animate5">
-      "Den gracias al Señor porque él es bueno; su amor es eterno." <br />
-      — Salmos 107:1
-    </p>
+<!-- Botón hamburguesa -->
+<button id="menuToggle" aria-label="Abrir menú">☰</button>
 
-    <div class="confetti"></div>
-    <div class="confetti"></div>
-    <div class="confetti"></div>
-    <div class="confetti"></div>
-    <div class="confetti"></div>
+<div id="sidebar">
+  <div id="logo">
+    <img src="https://imgur.com/2OHwuRo.png" alt="J&S STUDIOS GT Logo" />
   </div>
+  <nav id="menu">
+    <div class="menu-item active" data-category="marketing">Marketing</div>
+    <div class="menu-item" data-category="accesorios">Accesorios de Celulares</div>
+  </nav>
 </div>
+
+<div id="main">
+  <h1>J&S STUDIOS GT</h1>
+  <div id="products">
+    <!-- Marketing Products -->
+    <div class="product marketing" data-id="1" data-price="650">
+      <strong>Páginas Web</strong>
+      <img src="https://i.imgur.com/rJVgWoQ.jpg" alt="Imagen de Páginas Web" />
+      <p>Creación de sitios web personalizados para tu negocio o proyecto.</p>
+      <div class="price">Q650 anual</div>
+      <button class="add-btn">Agregar al carrito</button>
+    </div>
+    <div class="product marketing" data-id="2" data-price="150">
+      <strong>Menús Digitales</strong>
+      <img src="https://i.imgur.com/HRuK6jx.jpg" alt="Imagen de Menús Digitales" />
+      <p>Diseño de menús digitales para restaurantes, bares y más.</p>
+      <div class="price">Q150</div>
+      <button class="add-btn">Agregar al carrito</button>
+    </div>
+    <div class="product marketing" data-id="3" data-price="55">
+      <strong>Tarjetas de Presentación</strong>
+      <img src="https://i.imgur.com/8hW0sfJ.jpg" alt="Imagen de Tarjetas de Presentación" />
+      <p>Diseño único de tarjetas de presentación para tu marca.</p>
+      <div class="price">Q55 cada una</div>
+      <button class="add-btn">Agregar al carrito</button>
+    </div>
+    <div class="product marketing" data-id="4" data-price="100">
+      <strong>Diseño de Logos</strong>
+      <img src="https://i.imgur.com/zKpOWpR.jpg" alt="Imagen de Diseño de Logos" />
+      <p>Creación de logos originales y personalizados para tu empresa.</p>
+      <div class="price">Q100 cada uno</div>
+      <button class="add-btn">Agregar al carrito</button>
+    </div>
+    <!-- End Marketing Products -->
+  </div>
+
+  <section id="cart">
+    <h2>Tu carrito</h2>
+    <div id="cart-items">Tu carrito está vacío.</div>
+    <div id="cart-total">Total: Q0.00</div>
+    <textarea id="cart-note" placeholder="Agregar una nota opcional..."></textarea>
+    <button id="btn-whatsapp" disabled>Enviar pedido por WhatsApp</button>
+  </section>
+</div>
+
+<script>
+  const cart = [];
+  const btnWhatsapp = document.getElementById("btn-whatsapp");
+  const cartItemsDiv = document.getElementById("cart-items");
+  const cartTotalDiv = document.getElementById("cart-total");
+  const cartNote = document.getElementById("cart-note");
+
+  // Agregar producto al carrito
+  document.querySelectorAll('.add-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const productDiv = button.closest('.product');
+      const productName = productDiv.querySelector('strong').textContent;
+      const productPrice = parseFloat(productDiv.getAttribute('data-price'));
+      const productId = productDiv.getAttribute('data-id');
+
+      const existingProduct = cart.find(item => item.id === productId);
+
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        cart.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
+      }
+
+      updateCart();
+    });
+  });
+
+  // Actualizar el carrito
+  function updateCart() {
+    cartItemsDiv.innerHTML = '';
+    let total = 0;
+    
+    cart.forEach(item => {
+      total += item.price * item.quantity;
+      cartItemsDiv.innerHTML += `
+        <div>
+          <strong>${item.name}</strong>
+          <input type="number" value="${item.quantity}" min="1" class="quantity" data-id="${item.id}" />
+          <span>Q${item.price * item.quantity}</span>
+        </div>
+      `;
+    });
+
+    cartTotalDiv.textContent = `Total: Q${total.toFixed(2)}`;
+    btnWhatsapp.disabled = cart.length === 0;
+  }
+
+  // Modificar la cantidad de los productos
+  cartItemsDiv.addEventListener('input', function (e) {
+    if (e.target.classList.contains('quantity')) {
+      const productId = e.target.getAttribute('data-id');
+      const newQuantity = parseInt(e.target.value);
+
+      const product = cart.find(item => item.id === productId);
+      if (product) {
+        product.quantity = newQuantity;
+        updateCart();
+      }
+    }
+  });
+
+  // Enviar pedido por WhatsApp
+  btnWhatsapp.addEventListener('click', function () {
+    let orderDetails = `Pedido de J&S STUDIOS GT:\n\n`;
+    
+    cart.forEach(item => {
+      orderDetails += `${item.name} - Cantidad: ${item.quantity} - Precio: Q${(item.price * item.quantity).toFixed(2)}\n`;
+    });
+
+    const note = cartNote.value ? `\nNota adicional: ${cartNote.value}` : '';
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    orderDetails += `\n\nTotal: Q${total.toFixed(2)}${note}`;
+
+    const whatsappUrl = `https://wa.me/50248608447?text=${encodeURIComponent(orderDetails)}`;
+    window.open(whatsappUrl, '_blank');
+  });
+</script>
 
 </body>
 </html>
