@@ -27,7 +27,7 @@
     height: 100vh;
     overflow-y: auto;
     transition: left 0.3s ease;
-    left: 0;
+    left: -100%; /* Inicia oculto */
     top: 0;
     z-index: 10500;
   }
@@ -195,6 +195,7 @@
       transition: left 0.3s ease;
     }
 
+    /* Estilo del botón hamburguesa */
     #menuToggle {
       display: block;
       background-color: #00bcd4;
@@ -203,6 +204,10 @@
       font-size: 1.5rem;
       cursor: pointer;
       border: none;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 10501;
     }
 
     #main {
@@ -344,6 +349,13 @@
 
   // Inicializar mostrando los productos de la primera categoría (Marketing) por defecto
   showCategory('marketing');
+
+  // Mostrar el menú hamburguesa en pantallas pequeñas
+  document.getElementById('menuToggle').addEventListener('click', function() {
+    const sidebar = document.getElementById('sidebar');
+    const currentLeft = sidebar.style.left;
+    sidebar.style.left = (currentLeft === '0px') ? '-100%' : '0';
+  });
 </script>
 
 </body>
